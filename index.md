@@ -1,15 +1,33 @@
 
-## Adnan Ahmed
+# Adnan Ahmed's Ⲗ 
 
-Adnan is a Professional Developer working on Back End Development on Node.js. He has been studied Computer Science from [Barani Institute of Information Technology](https:\\www.biit.edu.pk) starting in 2018. He supports Open Source Software and the community that makes it possible. He also likes to dabble around functional programming and formalizing parts of mathematics in Theorem Prover's such as Coq, Isabelle and Agda.
+Adnan is a Professional Developer working on Back End Development on Node.js. He has been studying Computer Science from [Barani Institute of Information Technology](https:\\www.biit.edu.pk) starting in 2018. 
+
+He supports Open Source Software and the community that makes it possible. He also likes to work with functional programming and formalizing parts of mathematics in Theorem Prover's such as Coq, Isabelle and Agda.
 
 Adnan has a passion to uncover problems involved in Software Development and is constantly looking for Challenges. He is currently studying iOS Development with Swift.
 
+## Skills (Ordered By Preference)
+- Node.js
+- Haskell
+- Python
+- C++
 
 
-For more details see [About Page](https://adnahmed.github.io/about).
+## Enviornment and Tools
+- Linux 
+- macOS 
+- Git
+- VSCode
+- Spacemacs
 
-### Contact
+## Contact
 
-[Email Adnan](mailtoadnan.ahmed@gmail.com)
+- [Email Adnan](mailtoadnan.ahmed@gmail.com)
+
 [Follow on Twitter](twitter.com/adnaahm)
+=======
+- [Email Adnan](mailtoadnan.ahmed@gmail.com)
+
+- [Follow on Twitter](twitter.com/adnaahm)
+>>>>>>> 1f25120 (Update index.md)
