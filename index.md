@@ -7,9 +7,19 @@ He supports Open Source Software and the community that makes it possible. He al
 
 Adnan has a passion to uncover problems involved in Software Development and is constantly looking for Challenges. He is currently studying iOS Development with Swift.
 
+### Skills (Ordered By Preference)
+- Node.js
+- Haskell
+- Python
+- C++
 
 
-For more details see [About Page](https://adnahmed.github.io/about).
+### Enviornment and Tools
+- Linux 
+- macOS 
+- Git
+- VSCode
+- Spacemacs
 
 ### Contact
 
