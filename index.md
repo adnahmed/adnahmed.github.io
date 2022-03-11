@@ -11,4 +11,5 @@ For more details see [About Page](https://adnahmed.github.io/about).
 
 ### Contact
 
-    {% include follow-buttons.html %}
+[Email Adnan](mailtoadnan.ahmed@gmail.com)
+[Follow on Twitter](twitter.com/adnaahm)
