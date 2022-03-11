@@ -12,4 +12,5 @@ For more details see [About Page](https://adnahmed.github.io/about).
 ### Contact
 
 [Email Adnan](mailtoadnan.ahmed@gmail.com)
+
 [Follow on Twitter](twitter.com/adnaahm)
