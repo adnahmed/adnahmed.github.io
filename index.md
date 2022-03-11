@@ -1,37 +1,14 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/adnahmed/adnahmed.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+## Adnan Ahmed
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Adnan is a Professional Developer working on Back End Development on Node.js. He has been studied Computer Science from [Barani Institute of Information Technology](https:\\www.biit.edu.pk) starting in 2018. He supports Open Source Software and the community that makes it possible. He also likes to dabble around functional programming and formalizing parts of mathematics in Theorem Prover's such as Coq, Isabelle and Agda.
 
-### Markdown
+Adnan has a passion to uncover problems involved in Software Development and is constantly looking for Challenges. He is currently studying iOS Development with Swift.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+For more details see [About Page](https://adnahmed.github.io/about).
 
-- Bulleted
-- List
+### Contact
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/adnahmed/adnahmed.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+    {% include follow-buttons.html %}
