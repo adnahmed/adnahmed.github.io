@@ -22,12 +22,6 @@ Adnan has a passion to uncover problems involved in Software Development and is 
 - Spacemacs
 
 ## Contact
-
-- [Email Adnan](mailtoadnan.ahmed@gmail.com)
-
-[Follow on Twitter](twitter.com/adnaahm)
-=======
 - [Email Adnan](mailtoadnan.ahmed@gmail.com)
 
 - [Follow on Twitter](twitter.com/adnaahm)
->>>>>>> 1f25120 (Update index.md)
