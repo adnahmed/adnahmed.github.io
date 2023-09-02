@@ -1,7 +1,7 @@
 
 # Adnan Ahmed's Ⲗ 
 
-Adnan is a Professional Developer working on Back End Development on Node.js. He has been studying Computer Science from [Barani Institute of Information Technology](https:\\www.biit.edu.pk) starting in 2018. 
+Adnan is a Professional Developer working on Back End Development on Node.js. He has been studying Computer Science from [Barani Institute of Information Technology](http:\\www.biit.edu.pk) starting in 2018. 
 
 He supports Open Source Software and the community that makes it possible. He also likes to work with functional programming and formalizing parts of mathematics in Theorem Prover's such as Coq, Isabelle and Agda.
 
