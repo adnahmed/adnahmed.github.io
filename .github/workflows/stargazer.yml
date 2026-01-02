@@ -1,0 +1,27 @@
+name: Stargazer
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  stargazer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Stargazer
+        uses: zhuozhiyongde/gaze-stars@v1.0.0
+        with:
+          api-token: ${{ secrets.API_TOKEN }}
+          github-username: ${{ github.repository_owner }}
+          git-name: Github Action
+          git-email: actions@users.noreply.github.com
+          git-message: 'chore(updates): updated stars list'
+          sort-by: stars
+          output-path: lib/stars.md
