@@ -25,58 +25,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Stargazer job - updates stars list before build
-  stargazer:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: Install dependencies
-        run: |
-          git clone https://github.com/adnahmed/gaze-stars.git
-          cd gaze-stars
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-        shell: bash
-
-      - name: Run Stargazer
-        run: |
-          python gaze-stars/Stargazer.py
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.API_TOKEN }}
-          GITHUB_USERNAME: ${{ github.repository_owner }}
-          TEMPLATE_PATH: template/template.md
-          OUTPUT_PATH: public/stars.md
-          SORT_BY: stars
-
-      - name: Upload stars.md artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: stars-md
-          path: public/stars.md
-
   # Build job
   build:
     runs-on: ubuntu-latest
-    needs: stargazer
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: master
-      
-      - name: Download stars.md
-        uses: actions/download-artifact@v4
-        with:
-          name: stars-md
-          path: public/
       
       - name: Detect package manager
         id: detect-package-manager
