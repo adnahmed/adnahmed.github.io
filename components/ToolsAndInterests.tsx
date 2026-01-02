@@ -21,8 +21,7 @@ export function ToolsAndInterests() {
   const [isDepleted, setIsDepleted] = useState(false);
   
   // We use a ref to track the full list without triggering re-renders too often
-  const allParsedRepos = useRef<Repo[]>([]);
-  const categoriesFound = useRef<Set<string>>(new Set());
+  const categoriesCount = useRef<Map<string, number>>(new Map());
 
   const parseIncrementally = useCallback(async (text: string) => {
     const lines = text.split("\n");
@@ -34,6 +33,16 @@ export function ToolsAndInterests() {
     const tableSeparatorRegex = /^\|[-\s|]+\|$/;
     const tableRowRegex = /^\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|\s*([^|]*)\s*\|\s*⭐\s*[\d,]+\s*\|$/;
 
+    const updateCategories = () => {
+      const topCategories = Array.from(categoriesCount.current.entries())
+        .filter(([name]) => name !== "Uncategorized Repositories")
+        .sort((a, b) => b[1] - a[1]) // Sort by count descending
+        .slice(0, 10)
+        .map(([name]) => name)
+        .sort(); // Sort alphabetically for display
+      setCategories(topCategories);
+    };
+
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
       
@@ -42,8 +51,6 @@ export function ToolsAndInterests() {
         currentCategory = catMatch[1].trim();
         if (currentCategory.toLowerCase() === 'toc') {
           currentCategory = "General";
-        } else {
-          categoriesFound.current.add(currentCategory);
         }
         inTable = false;
         continue;
@@ -66,11 +73,15 @@ export function ToolsAndInterests() {
           
           batch.push(repo);
           
+          // Track category counts
+          const count = categoriesCount.current.get(currentCategory) || 0;
+          categoriesCount.current.set(currentCategory, count + 1);
+          
           // When batch is full, update state and wait
           if (batch.length >= CHUNK_SIZE) {
             const currentBatch = [...batch];
             setRepos(prev => [...prev, ...currentBatch]);
-            setCategories(Array.from(categoriesFound.current).sort());
+            updateCategories();
             batch = [];
             setIsLoading(false);
             // Yield to main thread
@@ -83,7 +94,7 @@ export function ToolsAndInterests() {
     // Add any remaining items
     if (batch.length > 0) {
       setRepos(prev => [...prev, ...batch]);
-      setCategories(Array.from(categoriesFound.current).sort());
+      updateCategories();
     }
     
     setIsLoading(false);
