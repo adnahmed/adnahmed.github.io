@@ -98,10 +98,4 @@ export const staticProjects = [
     tech: ["TypeScript", "Live Streaming", "WebRTC"],
     links: { github: "https://github.com/adnahmed/reps" },
   },
-  {
-    title: "Kisan Diary",
-    description: "Full-stack farmer's dairy application for tracking yield and sales.",
-    tech: ["Next.js", "TypeGraphQL", "Postgres"],
-    links: { github: "https://github.com/adnahmed/next-kisan-diary" },
-  },
 ];
