@@ -51,7 +51,7 @@ jobs:
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.API_TOKEN }}
-          GITHUB_USERNAME: slmkhanahmed
+          GITHUB_USERNAME: ${{ github.repository_owner }}
           TEMPLATE_PATH: template/template.md
           OUTPUT_PATH: public/stars.md
           SORT_BY: stars
