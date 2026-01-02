@@ -24,4 +24,5 @@ jobs:
           git-email: actions@users.noreply.github.com
           git-message: 'chore(updates): updated stars list'
           sort-by: stars
+          template-path: template/template.md
           output-path: lib/stars.md
