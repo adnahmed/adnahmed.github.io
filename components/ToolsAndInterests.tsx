@@ -1,7 +1,7 @@
 "use client";
 
 import { FolderGit2, Loader2 } from "lucide-react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 
 interface Repo {
@@ -11,9 +11,6 @@ interface Repo {
 	category: string;
 }
 
-const INITIAL_LOAD_SIZE = 60; // Enough to fill the screen twice
-const BATCH_SIZE = 40; // Add in larger chunks
-const BATCH_INTERVAL = 15000; // 15 seconds between updates to minimize jitter
 const MAX_DOM_ITEMS = 1000; // Limit total items to protect memory/CPU
 
 // Helper to slugify category names for GitHub URLs
@@ -36,24 +33,10 @@ const shuffle = <T,>(arr: T[]) => {
 	return copy;
 };
 
-// Take a random batch without replacement from a mutable array
-const takeRandomBatch = <T,>(source: T[], size: number) => {
-	const batch: T[] = [];
-	for (let i = 0; i < size && source.length > 0; i++) {
-		const idx = Math.floor(Math.random() * source.length);
-		batch.push(source[idx]);
-		source.splice(idx, 1);
-	}
-	return batch;
-};
-
 export function ToolsAndInterests() {
 	const [repos, setRepos] = useState<Repo[]>([]);
 	const [categories, setCategories] = useState<string[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
-
-	// Storage for everything we've parsed but haven't shown yet
-	const allParsedRepos = useRef<Repo[]>([]);
 
 	const parseEntireFile = useCallback((text: string) => {
 		const lines = text.split("\n");
@@ -123,10 +106,10 @@ export function ToolsAndInterests() {
 		setCategories(foundCategories.sort());
 
 		// Shuffle repos so every visit feels fresh
-		allParsedRepos.current = shuffle(parsedRepos);
+		const randomized = shuffle(parsedRepos);
 
-		// Load initial randomized set for the marquee, removing them from the pool
-		const initial = takeRandomBatch(allParsedRepos.current, INITIAL_LOAD_SIZE);
+		// Load once (capped to protect DOM) to avoid marquee resets while running
+		const initial = randomized.slice(0, MAX_DOM_ITEMS);
 		setRepos(initial);
 		setIsLoading(false);
 	}, []);
@@ -146,24 +129,6 @@ export function ToolsAndInterests() {
 
 		fetchStars();
 	}, [parseEntireFile]);
-
-	// Lazy loading logic: Add more items from the ref to the state in large, rare chunks
-	useEffect(() => {
-		if (isLoading) return;
-
-		const interval = setInterval(() => {
-			const remaining = allParsedRepos.current.length;
-
-			if (remaining > 0 && repos.length < MAX_DOM_ITEMS) {
-				const newBatch = takeRandomBatch(allParsedRepos.current, BATCH_SIZE);
-				setRepos((prev) => [...prev, ...newBatch]);
-			} else if (remaining === 0 || repos.length >= MAX_DOM_ITEMS) {
-				clearInterval(interval);
-			}
-		}, BATCH_INTERVAL);
-
-		return () => clearInterval(interval);
-	}, [isLoading, repos.length]);
 
 	return (
 		<div className="w-full py-20 bg-neutral-900/50 relative overflow-hidden">
