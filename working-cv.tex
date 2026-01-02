@@ -1,0 +1,124 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{microtype}
+\usepackage{enumitem}
+  \setlist[itemize]{nosep, topsep=3pt, left=1em, label=\textbullet}
+\usepackage[hidelinks]{hyperref}
+  \hypersetup{colorlinks=true, urlcolor=black, linkcolor=black}
+\usepackage{titlesec}
+  \titleformat{\section}{\large\bfseries\uppercase}{}{0em}{}[\titlerule]
+  \titlespacing*{\section}{0pt}{1.5ex plus .5ex minus .2ex}{1ex plus .2ex}
+\usepackage{needspace}
+\usepackage{fontawesome5}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+% --- Header ---
+\begin{center}
+  {\LARGE\bfseries Adnan Ahmed Khan}\\[0.4em]
+  \href{mailto:khanadnanahmed01@gmail.com}{khanadnanahmed01@gmail.com} \quad|\quad
+  \href{https://linkedin.com/in/adnahmed}{linkedin.com/in/adnahmed} \quad|\quad
+  \href{https://github.com/adnahmed}{github.com/adnahmed}
+\end{center}
+
+% --- Profile ---
+\section*{Profile}
+Full-Stack \& Mobile Lead with a strong focus on distributed systems and high-performance backend engineering. Proven record of transforming monolithic architectures for horizontal scalability and reducing critical API latency by \textbf{95--96\%}. Skilled at leading cross-functional teams, modernizing CI/CD pipelines, and delivering production-grade cloud infrastructures.
+
+% --- Work Experience ---
+\section{Work Experience}
+
+% Job 1: HackOnTech
+\noindent \textbf{\href{https://hackontech.com/}{HackOnTech}} \hfill Islamabad, Pakistan
+
+\textit{Team Lead} \hfill Sep 2024 -- Present
+\begin{itemize}
+    \item Lead a cross-functional team of \textbf{7 developers}, driving sprint planning, architectural decision-making, and delivery of high-impact features.
+    \item Modernized CI/CD pipelines to support \textbf{daily deployments}, reducing build times and improving release velocity.
+    \item Reduced production hotfix frequency by establishing automated testing, static analysis, and strict code review standards.
+    \item Mentor junior engineers in clean architecture and distributed-system thinking, improving team output consistency.
+\end{itemize}
+
+\needspace{4\baselineskip}
+\textit{Full Stack Developer} \hfill Apr 2023 -- Present
+\begin{itemize}
+    \item Built a dynamic \textbf{Node.js query builder} that reduced critical API latency from 30s+ timeouts to \textbf{<1s} by eliminating redundant joins and optimizing \texttt{GROUP BY} operations.
+    \item Re-architected a monolithic backend into \textbf{stateless, horizontally scalable} services capable of handling millions of records post-launch.
+    \item Engineered modules for \textbf{PDF transformation}, geometric calculations, and multi-thousand-row dataset processing using Sequelize.
+    \item Designed meteorological visualization dashboards using \textbf{deck.gl} and implemented hardened API security with \textbf{JWT} and layered validation.
+\end{itemize}
+
+{\small \textbf{Tech:} TypeScript, Node.js, Nest.js, Postgres, Neo4j, Redis, Docker, CI/CD, Firebase, GraphQL, Python.}
+
+\vspace{1.2em}
+
+% Job 2: GeekGenix
+\needspace{4\baselineskip}
+\noindent \textbf{\href{https://www.geekgenix.com/}{GeekGenix}} \hfill Islamabad, Pakistan\\
+\textit{Backend Developer} \hfill Dec 2020 -- Feb 2021
+\begin{itemize}
+    \item Integrated \textbf{Stripe} for secure payments and connected endpoints seamlessly with a React frontend.
+    \item Implemented authentication using \textbf{Passport.js} and strengthened reliability through Jest-based unit testing.
+    \item Designed RESTful APIs with Express.js \& MongoDB to support dynamic customer workflows.
+\end{itemize}
+
+{\small \textbf{Tech:} Node.js, Express.js, MongoDB, React, Passport.js, Stripe API, Jest.}
+
+% --- Education ---
+\section{Education}
+
+\textbf{BS Computer Science} \hfill Sep 2018 -- Feb 2023\\
+\href{https://www.uaar.edu.pk/}{PMAS Arid Agriculture University}, Rawalpindi
+
+\vspace{0.5em}
+\textbf{FSc Pre-Engineering} \hfill Mar 2016 -- Mar 2018\\
+\href{https://icb.edu.pk/}{Islamabad College for Boys}, Islamabad
+
+% --- Projects ---
+
+\needspace{6\baselineskip}
+\section{Projects}
+
+% PROJECT 1: Vidx
+\textbf{\href{https://clipifie.com/}{Vidx}} \hfill
+\href{https://github.com/adnahmed/vidx-infra}{\faGithub} \quad | \quad May 2025 -- Oct 2025
+\begin{itemize}
+    \item Architected a distributed video-rendering platform using \textbf{FastAPI} and \textbf{React}, supporting 50+ cinematic transitions.
+    \item Built a non-blocking parallel pipeline using \textbf{RabbitMQ + Celery}, dynamically scaling workers based on CPU/GPU availability.
+    \item Compiled a custom \textbf{FFmpeg} build with GL-Transitions to enable \textbf{4K rendering} while reducing memory overhead.
+\end{itemize}
+{\small \textbf{Tech:} FastAPI, React, RabbitMQ, Celery, Docker, MongoDB, Traefik, FFmpeg.}
+
+\vspace{1em}
+
+% PROJECT 2: Crackq
+\needspace{5\baselineskip}
+\textbf{\href{https://hashcrack-git-dev-adnan-repo.vercel.app/}{Crackq.me}} \hfill
+\href{https://github.com/adnahmed/hashcrack}{\faGithub} \quad | \quad Feb 2023 -- Dec 2023
+\begin{itemize}
+    \item Built a SaaS platform for distributed cryptographic hash cracking using \textbf{Next.js} and containerized workers.
+    \item Leveraged \textbf{Fitcrack (BOINC)} to orchestrate a global grid of GPU nodes, enabling on-demand scaling without downtime.
+\end{itemize}
+{\small \textbf{Tech:} Next.js, TypeScript, Docker, Hashcat, Fitcrack/BOINC.}
+
+\vspace{1em}
+
+% PROJECT 3: pdf-annotate.js
+\needspace{5\baselineskip}
+\textbf{\href{https://github.com/adnahmed/pdf-annotate.js}{pdf-annotate.js}} \hfill
+\href{https://github.com/adnahmed/pdf-annotate.js}{\faGithub} \quad | \quad Mar 2024 -- Apr 2024
+\begin{itemize}
+    \item Added a remote StoreAdapter enabling \textbf{real-time annotation sync} with a central API.
+    \item Optimized SVG/TypeScript rendering logic to prevent annotation overlap and improve interactive performance.
+\end{itemize}
+{\small \textbf{Tech:} PDF.js, TypeScript, SVG.}
+
+\end{document}
