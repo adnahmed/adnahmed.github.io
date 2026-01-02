@@ -117,11 +117,6 @@ export function ToolsAndInterests() {
           <h2 className="text-3xl font-bold text-center text-neutral-200">Tools & Ecosystems</h2>
           {isLoading && <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />}
         </div>
-         <p className="text-center text-neutral-400 mb-12">
-            Curated via <a href="https://github.com/adnahmed?tab=stars" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">GitHub Stars</a>
-            {isDepleted ? ` (${repos.length} total)` : repos.length > 0 ? ` (Loaded ${repos.length}...)` : ""}
-         </p>
-         
          {/* Tech Cloud */}
          <div className="flex flex-wrap justify-center gap-3 mb-16 max-w-3xl mx-auto min-h-[40px]">
             {categories.map((cat, idx) => (
