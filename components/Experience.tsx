@@ -13,21 +13,21 @@ export function Experience() {
             {/* Timeline Dot */}
             <div className="absolute -left-[5px] top-2 w-3 h-3 bg-neutral-200 rounded-full border border-neutral-900 shadow-[0_0_10px_rgba(255,255,255,0.5)] z-10" />
             
-            <div className="flex flex-col md:flex-row gap-4 justify-between mb-4">
+             <div className="flex flex-col md:flex-row gap-4 justify-between mb-4">
                <div>
                   <h3 className="text-xl font-semibold text-neutral-100">{job.company}</h3>
-                  <a href={job.link} target="_blank" className="text-sm text-neutral-500 hover:text-neutral-300 transition-colors">
+                  <a href={job.link} target="_blank" rel="noopener noreferrer" className="text-sm text-neutral-500 hover:text-neutral-300 transition-colors">
                     {job.location}
                   </a>
                </div>
                {/* Tech Stack for the job */}
-               <div className="flex flex-wrap gap-2 max-w-sm">
+               <div className="flex flex-wrap gap-2 max-w-sm items-start">
                  {job.tech?.slice(0, 5).map((t, i) => (
-                    <span key={i} className="text-xs bg-neutral-900 text-neutral-400 px-2 py-1 rounded-full border border-neutral-800">
+                    <span key={i} className="text-xs bg-neutral-800/50 text-neutral-300 px-3 py-1.5 rounded-full border border-neutral-700/50 hover:border-neutral-600 transition-colors whitespace-nowrap">
                         {t}
                     </span>
                  ))}
-                 {job.tech && job.tech.length > 5 && <span className="text-xs text-neutral-600 self-center">+{job.tech.length - 5}</span>}
+                 {job.tech && job.tech.length > 5 && <span className="text-xs text-neutral-500 self-center">+{job.tech.length - 5}</span>}
                </div>
             </div>
 

@@ -81,12 +81,6 @@ export const staticProjects = [
     links: { github: "https://github.com/adnahmed/vidx-infra", live: "https://clipifie.com/" },
   },
   {
-    title: "Crackq.me",
-    description: "SaaS platform for distributed cryptographic hash cracking using containerized workers.",
-    tech: ["Next.js", "TypeScript", "Docker", "Hashcat", "BOINC"],
-    links: { github: "https://github.com/adnahmed/hashcrack", live: "https://hashcrack-git-dev-adnan-repo.vercel.app/" },
-  },
-  {
     title: "pdf-annotate.js",
     description: "PDF annotation library with real-time sync and optimized SVG rendering.",
     tech: ["PDF.js", "TypeScript", "SVG"],
@@ -98,4 +92,10 @@ export const staticProjects = [
     tech: ["TypeScript", "Live Streaming", "WebRTC"],
     links: { github: "https://github.com/adnahmed/reps" },
   },
+  {
+    title: "Crackq.me",
+    description: "SaaS platform for distributed cryptographic hash cracking using containerized workers.",
+    tech: ["Next.js", "TypeScript", "Docker", "Hashcat", "BOINC"],
+    links: { github: "https://github.com/adnahmed/hashcrack", live: "https://hashcrack-git-dev-adnan-repo.vercel.app/" },
+  }
 ];
