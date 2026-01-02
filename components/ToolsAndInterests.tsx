@@ -4,6 +4,7 @@ import { getRecentStars } from "@/lib/github";
 import { Star } from "lucide-react";
 
 const interests = [
+  { name: "Reading Material", url: "https://github.com/stars/adnahmed/lists/must-read" },
   { name: "3D", url: "https://github.com/stars/adnahmed/lists/3d" },
   { name: "AI", url: "https://github.com/stars/adnahmed/lists/ai" },
   { name: "Big Data", url: "https://github.com/stars/adnahmed/lists/big-data" },
