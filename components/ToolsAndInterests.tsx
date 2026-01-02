@@ -11,8 +11,18 @@ interface Repo {
   category: string;
 }
 
-const CHUNK_SIZE = 20; // How many repos to add per batch
-const PARSE_DELAY = 100; // Delay between batches to keep UI smooth
+const CHUNK_SIZE = 50; // Larger chunks for smoother marquee updates
+const INITIAL_BATCH_SIZE = 30; // Load first batch quickly
+const PARSE_DELAY = 150;
+
+// Helper to slugify category names for GitHub URLs
+const slugify = (text: string) => {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "") // Remove emojis/specials
+    .trim()
+    .replace(/\s+/g, "-");
+};
 
 export function ToolsAndInterests() {
   const [repos, setRepos] = useState<Repo[]>([]);
@@ -20,41 +30,64 @@ export function ToolsAndInterests() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDepleted, setIsDepleted] = useState(false);
   
-  // We use a ref to track the full list without triggering re-renders too often
   const categoriesCount = useRef<Map<string, number>>(new Map());
 
   const parseIncrementally = useCallback(async (text: string) => {
     const lines = text.split("\n");
     let currentCategory = "General";
     let inTable = false;
+    let inTOC = false;
     let batch: Repo[] = [];
+    let hasLoadedInitial = false;
 
     const categoryRegex = /^##\s+(.+)$/;
     const tableSeparatorRegex = /^\|[-\s|]+\|$/;
     const tableRowRegex = /^\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|\s*([^|]*)\s*\|\s*⭐\s*[\d,]+\s*\|$/;
+    const tocItemRegex = /^-\s+\[(.+?)\s*\(\d+\)\]\(#.+\)$/;
 
-    const updateCategories = () => {
-      const topCategories = Array.from(categoriesCount.current.entries())
-        .filter(([name]) => name !== "Uncategorized Repositories")
-        .sort((a, b) => b[1] - a[1]) // Sort by count descending
-        .slice(0, 10)
-        .map(([name]) => name)
-        .sort(); // Sort alphabetically for display
-      setCategories(topCategories);
-    };
+    // 1. Immediate TOC Scan
+    const immediateCategories: string[] = [];
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      if (trimmedLine === "## TOC") {
+        inTOC = true;
+        continue;
+      }
+      if (inTOC && trimmedLine.startsWith("##")) break; // End of TOC
+      
+      if (inTOC) {
+        const match = trimmedLine.match(tocItemRegex);
+        if (match) {
+          const catName = match[1].trim();
+          if (catName !== "Uncategorized Repositories") {
+            immediateCategories.push(catName);
+          }
+        }
+      }
+    }
+    if (immediateCategories.length > 0) {
+      setCategories(immediateCategories.sort());
+    }
 
+    // 2. Incremental Repo Parsing
+    inTOC = false;
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
       
       const catMatch = line.match(categoryRegex);
       if (catMatch) {
-        currentCategory = catMatch[1].trim();
-        if (currentCategory.toLowerCase() === 'toc') {
-          currentCategory = "General";
+        const header = catMatch[1].trim();
+        if (header.toLowerCase() === "toc") {
+          inTOC = true;
+          continue;
         }
+        inTOC = false;
+        currentCategory = header;
         inTable = false;
         continue;
       }
+
+      if (inTOC) continue;
 
       if (tableSeparatorRegex.test(line)) {
         inTable = true;
@@ -72,29 +105,26 @@ export function ToolsAndInterests() {
           };
           
           batch.push(repo);
-          
-          // Track category counts
-          const count = categoriesCount.current.get(currentCategory) || 0;
-          categoriesCount.current.set(currentCategory, count + 1);
-          
-          // When batch is full, update state and wait
-          if (batch.length >= CHUNK_SIZE) {
+
+          // Update logic
+          const shouldUpdate = !hasLoadedInitial 
+            ? batch.length >= INITIAL_BATCH_SIZE 
+            : batch.length >= CHUNK_SIZE;
+
+          if (shouldUpdate) {
             const currentBatch = [...batch];
             setRepos(prev => [...prev, ...currentBatch]);
-            updateCategories();
             batch = [];
+            hasLoadedInitial = true;
             setIsLoading(false);
-            // Yield to main thread
             await new Promise(resolve => setTimeout(resolve, PARSE_DELAY));
           }
         }
       }
     }
 
-    // Add any remaining items
     if (batch.length > 0) {
       setRepos(prev => [...prev, ...batch]);
-      updateCategories();
     }
     
     setIsLoading(false);
@@ -117,9 +147,7 @@ export function ToolsAndInterests() {
     fetchStars();
   }, [parseIncrementally]);
 
-  // Keep a maximum of 150 items in the marquee to prevent memory bloat
-  // while still providing a long enough list for a smooth loop.
-  const displayRepos = repos.slice(-150);
+  const displayRepos = repos.slice(-200);
 
   return (
     <div className="w-full py-20 bg-neutral-900/50 relative overflow-hidden">
@@ -128,12 +156,19 @@ export function ToolsAndInterests() {
           <h2 className="text-3xl font-bold text-center text-neutral-200">Tools & Ecosystems</h2>
           {isLoading && <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />}
         </div>
+         
          {/* Tech Cloud */}
-         <div className="flex flex-wrap justify-center gap-3 mb-16 max-w-3xl mx-auto min-h-[40px]">
+         <div className="flex flex-wrap justify-center gap-3 mb-16 max-w-4xl mx-auto min-h-[40px]">
             {categories.map((cat, idx) => (
-                <span key={idx} className="px-4 py-2 bg-neutral-800/80 border border-neutral-700 rounded-full text-neutral-300 text-sm animate-in fade-in zoom-in duration-300">
+                <a 
+                  key={idx} 
+                  href={`https://github.com/stars/adnahmed/lists/${slugify(cat)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-neutral-800/80 border border-neutral-700 rounded-full text-neutral-300 text-sm hover:bg-neutral-700 hover:border-blue-500/50 transition-all cursor-pointer animate-in fade-in zoom-in duration-300"
+                >
                     {cat}
-                </span>
+                </a>
             ))}
          </div>
       </div>
@@ -143,7 +178,7 @@ export function ToolsAndInterests() {
          <div className="absolute inset-0 bg-gradient-to-r from-neutral-900 via-transparent to-neutral-900 z-10 pointer-events-none" />
          
          {repos.length > 0 ? (
-           <Marquee gradient={false} speed={40} pauseOnHover>
+           <Marquee gradient={false} speed={35} pauseOnHover>
               {displayRepos.map((repo, idx) => (
                   <a key={`${repo.url}-${idx}`} href={repo.url} target="_blank" rel="noopener noreferrer" className="mx-6 w-72 flex flex-col gap-2 p-4 rounded-lg bg-neutral-900/40 border border-white/[0.05] hover:border-white/[0.2] transition group">
                       <div className="flex items-center justify-between">
@@ -167,4 +202,5 @@ export function ToolsAndInterests() {
     </div>
   );
 }
+
 
