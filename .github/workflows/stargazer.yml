@@ -42,6 +42,7 @@ jobs:
           SORT_BY: stars
 
       - name: Commit and push changes
+        id: commit
         run: |
           git config --global user.name "Github Action"
           git config --global user.email "actions@users.noreply.github.com"
@@ -49,12 +50,15 @@ jobs:
           if ! git diff-index --quiet HEAD --; then
             git commit -m "chore(updates): updated stars list"
             git push
+            echo "changes=true" >> $GITHUB_OUTPUT
           else
             echo "No changes to commit."
+            echo "changes=false" >> $GITHUB_OUTPUT
           fi
         shell: bash
 
       - name: Detect package manager
+        if: steps.commit.outputs.changes == 'true'
         id: detect-package-manager
         run: |
           if [ -f "${{ github.workspace }}/yarn.lock" ]; then
@@ -73,22 +77,27 @@ jobs:
           fi
 
       - name: Setup Node
+        if: steps.commit.outputs.changes == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Install dependencies
+        if: steps.commit.outputs.changes == 'true'
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build with Next.js
+        if: steps.commit.outputs.changes == 'true'
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
 
       - name: Upload artifact
+        if: steps.commit.outputs.changes == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
 
       - name: Deploy to GitHub Pages
+        if: steps.commit.outputs.changes == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
