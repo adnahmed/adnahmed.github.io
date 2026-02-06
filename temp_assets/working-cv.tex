@@ -16,71 +16,69 @@
   \titlespacing*{\section}{0pt}{1.5ex plus .5ex minus .2ex}{1ex plus .2ex}
 \usepackage{needspace}
 \usepackage{fontawesome5}
+\usepackage[none]{hyphenat} % disable word hyphenation
 
 \setlength{\parindent}{0pt}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\emergencystretch=3em % allow stretch instead of hyphenating
 
 \begin{document}
 
 % --- Header ---
 \begin{center}
   {\LARGE\bfseries Adnan Ahmed Khan}\\[0.4em]
+  {\large Senior Backend \& Platform Engineer — Distributed Systems, Kubernetes, SRE}\\[0.25em]
+  Islamabad, Pakistan \quad|\quad Open to Remote \& Employer-Sponsored Relocation\\[0.4em]
   \href{mailto:khanadnanahmed01@gmail.com}{khanadnanahmed01@gmail.com} \quad|\quad
   \href{https://linkedin.com/in/adnahmed}{linkedin.com/in/adnahmed} \quad|\quad
   \href{https://github.com/adnahmed}{github.com/adnahmed}
 \end{center}
 
-% --- Profile ---
-\section*{Profile}
-Full-Stack \& Mobile Lead with 5 years of experience specializing in distributed systems, high-performance backend engineering, and cloud-native architectures. Proven record of transforming monolithic systems for horizontal scalability and reducing critical API latency by up to \textbf{96\%}. Expert in leading cross-functional teams and modernizing CI/CD pipelines for production-grade cloud infrastructures.
-
 % --- Work Experience ---
 \section{Work Experience}
 
 % Job 1: HackOnTech
-\noindent \textbf{\href{https://hackontech.com/}{HackOnTech}} \hfill Islamabad, Pakistan
+\noindent \textbf{\href{https://hackontech.com/}{HackOnTech}}
 
-\textit{Team Lead} \hfill Sep 2024 -- Present
+\textit{Senior Software Engineer (Backend \& Platform)} \hfill 2023 -- Present\\
+{\small Internal B2B/G2G platforms for international NGOs; Scale: 50k--100k DAU, 500--800 RPS peak, 99.9\% availability target.}
 \begin{itemize}
-     \item Lead a cross-functional team of \textbf{7 developers}, driving architectural decisions and the delivery of high-availability cloud services on \textbf{AWS}.
-    \item Modernized CI/CD pipelines using \textbf{Terraform} and \textbf{GitHub Actions} to support daily deployments and automated infrastructure provisioning. 
-    \item Reduced production hotfix frequency by establishing automated testing, static analysis, and strict code review standards.
-    \item Mentor junior engineers in clean architecture and distributed system thinking, improving team output consistency.
+    \item Decomposed a monolith into 6 Docker/EKS microservices, cutting deploy time from hours to minutes with zero-downtime releases.
+    \item Instrumented Jaeger tracing and Prometheus/Grafana dashboards to cut MTTR from \textasciitilde45 minutes to under 10 by isolating cross-service latency.
+    \item Implemented Temporal workflows with idempotency/compensation to cut failed cross-service ops \textasciitilde80\% (150/day to <30).
+    \item Reduced payment failures from \textasciitilde5\% to 2\% by rebuilding retries and rollbacks in AWS Step Functions.
+    \item Reduced core query latency from 30s+ to under 1s through indexing, connection pooling, and service decomposition (Postgres/Redis).
+    \item Built GitHub Actions + ArgoCD CI/CD with security gates and canary/blue-green releases, supporting 99.9\% availability.
+    \item Reduced AWS spend \textasciitilde25\% via EKS node rightsizing, autoscaling threshold tuning, and spot for non-prod without SLO impact.
+    \item Stabilized 500--800 RPS burst windows with rate limiting, queue-based smoothing, and graceful degradation.
 \end{itemize}
+{\small \textbf{Tech:} AWS (EKS, Lambda, S3, Secrets Manager, IAM, CloudFront, Route 53), IaC (Terraform, Helm), CI/CD (GitHub Actions, ArgoCD), Observability (Prometheus, Grafana, Jaeger, Datadog), Backend (TypeScript/Node.js, Nest.js, Python/FastAPI), Workflows (Temporal, Step Functions), Datastores (Postgres, Redis), Containers (Docker).}
 
-\needspace{4\baselineskip}
-\textit{Full Stack Developer} \hfill Apr 2023 -- Sep 2024
-\begin{itemize}
-    \item Built a dynamic \textbf{Node.js query builder} that reduced critical API latency from 30s+ to \textbf{<1s} by optimizing complex PostgreSQL operations.
-    \item Re-architected a monolithic backend into \textbf{horizontally scalable microservices} using \textbf{Docker} and \textbf{AWS EKS}, handling millions of records.
-    \item Implemented hardened API security with \textbf{JWT}, layered validation, and \textbf{AWS WAF} to protect sensitive data.
-\end{itemize}
-{\small \textbf{Tech:} TypeScript, Node.js, Nest.js, AWS (EKS, Lambda, S3), Terraform, Postgres, Redis, Docker, CI/CD.}
-
-\vspace{1.2em}
+\vspace{0.8em}
 
 % Job 2: Creative IT Park (NEW)
-\noindent \textbf{\href{https://creativeitpark.org/}{Creative IT Park}} \hfill Islamabad, Pakistan
+\noindent \textbf{\href{https://creativeitpark.org/}{Creative IT Park}}
 
-\textit{Software Engineer} \hfill Feb 2021 -- Mar 2023
+\textit{Backend Developer} \hfill 2021 -- 2023
 \begin{itemize}
-    \item Scaled 10+ diverse products (SaaS, Portals, E-commerce) by implementing a robust backend architecture using \textbf{Node.js}, \textbf{Python}, and \textbf{AWS (ECS, RDS)}.
-    \item Improved search performance and data retrieval speed by \textbf{70\%} through the integration of \textbf{ElasticSearch} and \textbf{ElastiCache (Redis)}.
-    \item Architected high-concurrency event-driven systems using \textbf{Kafka} and \textbf{Serverless} functions to handle real-time data processing for AI-driven applications.
-    \item Developed secure healthcare and fintech integrations using \textbf{FHIR} standards and \textbf{OAuth 2.0}, ensuring industry-grade compliance.
-    \item Established a component-driven frontend workflow with \textbf{React}, \textbf{Redux Toolkit}, and \textbf{Storybook}, reducing UI development time by \textbf{40\%}.
+    \item Delivered backend services for School Management System, Rawalpindi Women University, and Capital Development Authority portal, building APIs and database workflows.
+    \item Cut search latency by eliminating N+1 queries and introducing aggregated queries with Elasticsearch + Redis caching.
+    \item Maintained notification delivery during downstream failures by implementing a Kafka-based pipeline with retries and circuit breakers.
+    \item Prevented traffic to degraded pods by operating Kubernetes/Helm deployments with readiness probes and health gating.
 \end{itemize}
-{\small \textbf{Tech:} React.js, TypeScript, Node.js, Python, AWS (ECS, Kafka), Docker, Kubernetes, PostgreSQL, MongoDB, FHIR, Jest.}
+{\small \textbf{Tech:} Backend (Node.js, Python/FastAPI), Frontend (React, TypeScript), AWS (ECS, RDS, DynamoDB, IAM), Data/Queues (Kafka, Elasticsearch, Redis), Kubernetes/Helm, Observability (ELK Stack), Datastores (PostgreSQL, MongoDB), Testing (Jest), Containers (Docker).}
 
-\vspace{1.2em}
+\vspace{0.8em}
 
 % Job 3: GeekGenix
 \needspace{4\baselineskip}
-\noindent \textbf{\href{https://www.geekgenix.com/}{GeekGenix}} \hfill Islamabad, Pakistan\\
-\textit{Backend Developer} \hfill Dec 2020 -- Feb 2021
+\noindent \textbf{\href{https://www.geekgenix.com/}{GeekGenix}}
+
+\textit{Backend Developer} \hfill 2020 -- 2021
 \begin{itemize}
-    \item Integrated \textbf{Stripe} for secure payments and connected endpoints seamlessly with a React frontend.
-    \item Implemented authentication using \textbf{Passport.js} and strengthened reliability through Jest-based unit testing.
-    \item Designed RESTful APIs with Express.js \& MongoDB to support dynamic customer workflows.
+   \item Designed payment APIs with Express.js/MongoDB and integrated Stripe checkout plus webhook reconciliation for production use.
+    \item Hardened authentication with Passport.js strategies and Jest tests, stabilizing login flows in QA.
 \end{itemize}
 
 {\small \textbf{Tech:} Node.js, Express.js, MongoDB, React, Passport.js, Stripe API, Jest.}
@@ -88,50 +86,44 @@ Full-Stack \& Mobile Lead with 5 years of experience specializing in distributed
 % --- Education ---
 \section{Education}
 
-\textbf{BS Computer Science} \hfill Sep 2018 -- Feb 2023\\
+\textbf{BS Computer Science}\\
 \href{https://www.uaar.edu.pk/}{PMAS Arid Agriculture University}, Rawalpindi
-
-\vspace{0.5em}
-\textbf{FSc Pre-Engineering} \hfill Mar 2016 -- Mar 2018\\
-\href{https://icb.edu.pk/}{Islamabad College for Boys}, Islamabad
 
 % --- Projects ---
 
 \needspace{6\baselineskip}
-\section{Projects}
+\section{Selected Projects}
 
 % PROJECT 1: Vidx
 \textbf{\href{https://clipifie.com/}{Vidx}} \hfill
-\href{https://github.com/adnahmed/vidx-infra}{\faGithub} \quad | \quad May 2025 -- Oct 2025
+\href{https://github.com/adnahmed/vidx-infra}{\faGithub} \quad | \quad 2025
 \begin{itemize}
-    \item Architected a distributed video-rendering platform using \textbf{FastAPI} and \textbf{React}, supporting 50+ cinematic transitions.
-    \item Built a non-blocking parallel pipeline using \textbf{RabbitMQ + Celery}, dynamically scaling workers based on CPU/GPU availability.
-    \item Compiled a custom \textbf{FFmpeg} build with GL-Transitions to enable \textbf{4K rendering} while reducing memory overhead.
+    \item Compiled a custom FFmpeg build with GL-Transitions and streaming pipelines to cut peak memory \textasciitilde40\%, enabling 4K on mid-tier GPUs.
+    \item Resolved GPU bottlenecks by autoscaling consumers on queue depth and adding priority queues, improving turnaround under burst load.
+    \item Built a 4K-capable rendering platform with a FastAPI backend, async task queues, and distributed GPU workers supporting 50+ GL-Transitions shaders.
 \end{itemize}
-{\small \textbf{Tech:} FastAPI, React, RabbitMQ, Celery, Docker, MongoDB, Traefik, FFmpeg.}
-
 \vspace{1em}
 
 % PROJECT 2: Crackq
 \needspace{5\baselineskip}
 \textbf{\href{https://hashcrack-git-dev-adnan-repo.vercel.app/}{Crackq.me}} \hfill
-\href{https://github.com/adnahmed/hashcrack}{\faGithub} \quad | \quad Feb 2023 -- Dec 2023
+\href{https://github.com/adnahmed/hashcrack}{\faGithub} \quad | \quad 2023\\
+{\small Authorized Security Research \& Educational Platform.}
 \begin{itemize}
-    \item Built a SaaS platform for distributed cryptographic hash cracking using \textbf{Next.js} and containerized workers.
-    \item Leveraged \textbf{Fitcrack (BOINC)} to orchestrate a global grid of GPU nodes, enabling on-demand scaling without downtime.
+    \item Built a distributed hash-testing platform for authorized security research, integrating Hashcat with a BOINC-style volunteer GPU grid and secure job dispatch.
+    \item Solved throughput bottlenecks by tuning kernel batch sizes and scheduling, increasing hashes/sec without adding hardware.
+    \item Implemented capability-aware routing and priority queues to keep urgent jobs moving while maintaining fairness.
 \end{itemize}
-{\small \textbf{Tech:} Next.js, TypeScript, Docker, Hashcat, Fitcrack/BOINC.}
 
 \vspace{1em}
 
 % PROJECT 3: pdf-annotate.js
 \needspace{5\baselineskip}
 \textbf{\href{https://github.com/adnahmed/pdf-annotate.js}{pdf-annotate.js}} \hfill
-\href{https://github.com/adnahmed/pdf-annotate.js}{\faGithub} \quad | \quad Mar 2024 -- Apr 2024
+\href{https://github.com/adnahmed/pdf-annotate.js}{\faGithub} \quad | \quad 2024
 \begin{itemize}
-    \item Added a remote StoreAdapter enabling \textbf{real-time annotation sync} with a central API.
-    \item Optimized SVG/TypeScript rendering logic to prevent annotation overlap and improve interactive performance.
+    \item Added real-time multi-user annotation via a WebSocket StoreAdapter with conflict resolution for synchronized sessions.    
+    \item Achieved smooth 60fps rendering under high annotation counts by adding spatial indexing and SVG optimizations.
 \end{itemize}
-{\small \textbf{Tech:} PDF.js, TypeScript, SVG.}
 
 \end{document}
